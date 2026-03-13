@@ -11,7 +11,6 @@ def hypo(a:int, b:int)->int:
 
 def main():
     print(hypo(3,5))
-    print(hypo(810,980))
 
 if __name__ == "__main__":
     main()
