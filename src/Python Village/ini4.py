@@ -13,7 +13,6 @@ def sum_odds(a:int ,b:int)->int:
 
 def main():
     print(sum_odds(100, 200))
-    print(sum_odds(4909, 9096))
 
 if __name__ == "__main__":
     main()
