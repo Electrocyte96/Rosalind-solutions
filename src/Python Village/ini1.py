@@ -5,7 +5,6 @@ After downloading and installing Python, type import this into the Python comman
 what happens. Then, click the "Download dataset" button below and copy the Zen of Python into 
 the space provided.
 '''
-
 def main():
     import this
 
