@@ -34,7 +34,7 @@ def fasta_to_dict(dna_seqs:str)->dict:
         seq_dict[header] = ''.join(seq)
     return seq_dict
 
-def gc_cont(s:str):
+def gc_cont(s:str)->float:
     gc_count=0
     n = len(s)
     for i in range(n):
