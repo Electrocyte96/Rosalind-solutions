@@ -20,7 +20,7 @@ def p_dominant(k:int, m:int, n:int)->float:
     return 1 - (p_mxm + p_mxn_p_nxm + p_nxn) 
 def main():
     k, m, n = 2 ,2, 2
-    prob = p_dominant(17,20,23)
+    prob = p_dominant(k,m,n)
     print(f"{prob:.5f}")
 
 if __name__ == "__main__":
