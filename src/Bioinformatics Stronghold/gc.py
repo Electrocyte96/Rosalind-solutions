@@ -50,6 +50,7 @@ def max_gc(seq_dict)->float:
 
 def main():
     seq_dict = fasta_to_dict(dna_seqs)
+    print(seq_dict)
     gc_max = max_gc(seq_dict)
     for i in gc_max:
         print(i)
