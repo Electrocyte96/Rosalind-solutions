@@ -13,7 +13,7 @@ def mortal_wabbits(n:int, m:int)->int:
     return sum(edad)
 
 def main():
-    print(mortal_wabbits(89, 16))
+    print(mortal_wabbits(6, 3))
 
 if __name__ == "__main__":
     main()

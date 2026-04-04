@@ -1,4 +1,4 @@
-# Rabbits and Recurrence Relations (ID: FIB)
+#   Rabbits and Recurrence Relations (ID: FIB)
 
 The algorithm used for this case was `F(n) = F(n-1) + k * F(n-2)` and it was implemented using an iterative approach `a, b = b, b + k * a` and using an auxiliar variable `aux` to handle values to `b` in each step and where `a = F(n-2)` and `b = F(n-1)`
 
