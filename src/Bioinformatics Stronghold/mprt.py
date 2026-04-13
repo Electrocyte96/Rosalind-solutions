@@ -6,6 +6,9 @@ Return: For each protein possessing the N-glycosylation motif,
 output its given access ID followed by a list of locations in the 
 protein string where the motif can be found.
 '''
+import requests
+import time
+
 dna_seqs = '''
 >B5ZC00
 MKNKFKTQEELVNHLKTVGFVFANSEIYNGLANAWDYGPLGVLLKNNLKNLWWKEFVTKQ
@@ -46,21 +49,19 @@ SFTPSVPTSNTYIKTKNTGYFEHTALTTSSVGLNSFSETAVSSQGTKIDTFLVSSLIAYP
 SSASGSQLSGIQQNFTSTSLMISTYEGKASIFFSAELGSIIFLLLSYLLF
 '''.splitlines()
 
-def fasta_to_dict(dna_strings:str)->dict:
-    seq_dict = {}
-    seq=[]
-    header = None
-    for i in range(len(dna_strings)):
-        if dna_strings[i].startswith('>'):
-            if header:
-                seq_dict[header] = ''.join(seq)
-            header = dna_strings[i][1:]
-            seq = []
+def get_seqs(entries_short:list, entries:list)->dict:
+    seqs = {}
+    for entry, full_entry in zip(entries_short, entries):
+        URL = f'https://rest.uniprot.org/uniprotkb/{entry}.fasta'
+        response = requests.get(URL)
+        if response.status_code == 200:
+            lines = response.text.splitlines()
+            seq = ''.join(lines[1:])
+            seqs[full_entry] = seq
+            time.sleep(0.3)
         else:
-            seq.append(dna_strings[i])
-    if header:
-        seq_dict[header] = ''.join(seq)
-    return seq_dict
+            print(f"Error when trying to reach {URL}.  code: {response.status_code}")
+    return seqs
 
 def motif_finder(seqs_dict:dict)->dict:
     motif_dict = {}
@@ -79,8 +80,11 @@ def motif_finder(seqs_dict:dict)->dict:
     return motif_dict
 
 def main():
-    seqs_dict = fasta_to_dict(dna_seqs)
-    motif_dict = motif_finder(seqs_dict)
+    with open('data/Bioinformatics Stronghold/mprt.txt', 'r') as file:
+        entries = file.read().splitlines()
+    entries_short = [entry.split('_')[0] for entry in entries]
+    petition_seq = get_seqs(entries_short, entries)
+    motif_dict = motif_finder(petition_seq)
     for key, value in motif_dict.items():
         if value:
             print(key)
