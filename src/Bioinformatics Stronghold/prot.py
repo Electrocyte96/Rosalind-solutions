@@ -26,9 +26,10 @@ def rna_to_prot(s:str)->str:
     protein = []
     for i in range(0, n, k):
         amino = s[i:i+3]
+        if codons[amino] == 'Stop':
+            break
         protein.append(codons[amino])
-        clean_protein = [amin for amin in protein if amin != 'Stop']
-    return ''.join(clean_protein)
+    return ''.join(protein)
 
 def main():
     s = 'AUGGCCAUGGCGCCCAGAACUGAGAUCAAUAGUACCCGUAUUAACGGGUGA'
