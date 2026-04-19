@@ -18,6 +18,7 @@ def p_dominant(k:int, m:int, n:int)->float:
     p_nxn = (n/total) * ((n-1)/(total-1)) * p_aaxaa
 
     return 1 - (p_mxm + p_mxn_p_nxm + p_nxn) 
+
 def main():
     k, m, n = 2 ,2, 2
     prob = p_dominant(k,m,n)
