@@ -26,9 +26,10 @@ def rna_to_prot(s:str)->str:
     protein = []
     for i in range(0, n, k):
         amino = s[i:i+3]
-        if codons[amino] == 'Stop':
-            break
-        protein.append(codons[amino])
+        if len(amino) == 3:
+            if codons[amino] == 'Stop':
+                break
+            protein.append(codons[amino])
     return ''.join(protein)
 
 def main():
