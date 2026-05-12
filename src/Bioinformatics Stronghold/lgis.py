@@ -5,7 +5,7 @@ Given: A positive integer n≤10000 followed by a permutation π of length n.
 Return: A longest increasing subsequence of π, followed by a longest decreasing subsequence of π.
 '''
 def longest_increasing(perm:list, n:int)->list:
-    longs = [1]*n
+    longs = [1] * n
     padres = [-1] * n 
     for i in range(n):
         for j in range(i):
@@ -21,7 +21,7 @@ def longest_increasing(perm:list, n:int)->list:
     return lis[::-1]
 
 def longest_decreasing(perm:list, n:int)->list:
-    longs = [1]*n
+    longs = [1] * n
     padres = [-1] * n 
     for i in range(n):
         for j in range(i):
