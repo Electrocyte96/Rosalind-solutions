@@ -22,6 +22,13 @@ def fasta_to_dict(dna_strings:str)->dict:
         seq_dict[header] = ''.join(seq)
     return seq_dict
 
+def overlap(s:str, t:str)->str:
+    k = len(s)
+    k_2 = int(k/2)
+    for i in range(k, k_2, -1):
+        if s[-i:] == t[:i]:
+            return s + t[i:]
+
 def main():
     dna_seqs = '''
 >Rosalind_56
@@ -34,10 +41,16 @@ AGACCTGCCG
 GCCGGAATAC
 '''.splitlines()
     dna_dict = fasta_to_dict(dna_seqs)
-    
     seqs =list(dna_dict.values())
+    print(seqs)
+    #print(seqs[0], seqs[2])
+    for i in seqs:
+        print('-----------')
+        print(i)
+        for j in seqs:
+            if i != j:
+                print(overlap(i,j))
     
-    print(seqs[0] + seqs[1])
 
 
 if __name__ == "__main__":
