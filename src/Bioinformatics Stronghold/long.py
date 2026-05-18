@@ -23,11 +23,46 @@ def fasta_to_dict(dna_strings:str)->dict:
     return seq_dict
 
 def overlap(s:str, t:str)->str:
-    k = len(s)
-    k_2 = int(k/2)
+    k = min(len(s), len(t))
+    k_2 = k//2
     for i in range(k, k_2, -1):
         if s[-i:] == t[:i]:
-            return s + t[i:]
+            return i
+    return 0
+
+def right_read(seq:str, seqs:list)->list:
+    n = len(seqs)
+    for i in range(n):
+        if seq != seqs[i]:
+            ovr = overlap(seq, seqs[i])
+            if ovr:
+                return seqs[i], i, ovr
+
+def left_read(seq:str, seqs:list)->list:
+    n = len(seqs)
+    for i in range(n):
+        if seq != seqs[i]:
+            ovr = overlap(seqs[i], seq)
+            if ovr:
+                return seqs[i], i, ovr
+
+def assemble(seqs:list)->str:
+    seq = seqs.pop(0)
+    while seqs:
+        r = right_read(seq, seqs)
+        if r:
+            seq_over, i, i_ovr = r
+            if seq_over:
+                seq = seq + seq_over[i_ovr:]
+                seqs.pop(i)
+        else: 
+            r  = left_read(seq, seqs)
+            if r:
+                seq_over, i, i_ovr = r
+                if seq_over:
+                    seq = seq_over[:-i_ovr] + seq
+                    seqs.pop(i)
+    return seq
 
 def main():
     dna_seqs = '''
@@ -41,17 +76,14 @@ AGACCTGCCG
 GCCGGAATAC
 '''.splitlines()
     dna_dict = fasta_to_dict(dna_seqs)
-    seqs =list(dna_dict.values())
-    print(seqs)
-    #print(seqs[0], seqs[2])
-    for i in seqs:
-        print('-----------')
-        print(i)
-        for j in seqs:
-            if i != j:
-                print(overlap(i,j))
-    
-
+    seqs = list(dna_dict.values())
+    #print(assemble(seqs))
+    n = len(seqs)
+    for i in range(n):
+        print('-----',seqs[i],'-----')
+        for j in range(n):
+                if seqs[i] != seqs[j]:
+                    print(seqs[j])
 
 if __name__ == "__main__":
     main()
