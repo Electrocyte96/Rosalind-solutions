@@ -50,18 +50,20 @@ def assemble(seqs:list)->str:
     seq = seqs.pop(0)
     while seqs:
         r = right_read(seq, seqs)
-        if r:
-            seq_over, i, i_ovr = r
-            if seq_over:
-                seq = seq + seq_over[i_ovr:]
-                seqs.pop(i)
-        else: 
-            r  = left_read(seq, seqs)
-            if r:
-                seq_over, i, i_ovr = r
-                if seq_over:
-                    seq = seq_over[:-i_ovr] + seq
-                    seqs.pop(i)
+        if not r:
+            break
+        seq_over, i, i_ovr = r
+        seq = seq + seq_over[i_ovr:]
+        seqs.pop(i)
+        
+    while seqs:
+        r  = left_read(seq, seqs)
+        if not r:
+            break
+        seq_over, i, i_ovr = r
+        seq = seq_over[:-i_ovr] + seq
+        seqs.pop(i)
+        
     return seq
 
 def main():
@@ -77,13 +79,8 @@ GCCGGAATAC
 '''.splitlines()
     dna_dict = fasta_to_dict(dna_seqs)
     seqs = list(dna_dict.values())
-    #print(assemble(seqs))
-    n = len(seqs)
-    for i in range(n):
-        print('-----',seqs[i],'-----')
-        for j in range(n):
-                if seqs[i] != seqs[j]:
-                    print(seqs[j])
+    print(assemble(seqs))
+    
 
 if __name__ == "__main__":
     main()
