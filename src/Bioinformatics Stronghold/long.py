@@ -66,6 +66,29 @@ def assemble(seqs:list)->str:
         
     return seq
 
+def assemble2(seqs:list)->str:
+    print('inicio de la funcion seqs tiene', len(seqs), 'lementos')
+    seq = seqs.pop(0)
+    print('aqui todavia no entra el loop',seqs)
+    while seqs:
+        r = right_read(seq, seqs)
+        if not r:
+            break
+        seq_over, i, i_ovr = r
+        seq = seq + seq_over[i_ovr:]
+        seqs.pop(i)
+        print(seqs)
+    print('aqui ya busco en la derecha y ahora procede en la izquierda',seqs)
+    while seqs:
+        r  = left_read(seq, seqs)
+        if not r:
+            break
+        seq_over, i, i_ovr = r
+        seq = seq_over[:-i_ovr] + seq
+        seqs.pop(i)
+        print(seqs)
+    return seq
+
 def main():
     dna_seqs = '''
 >Rosalind_56
@@ -79,7 +102,7 @@ GCCGGAATAC
 '''.splitlines()
     dna_dict = fasta_to_dict(dna_seqs)
     seqs = list(dna_dict.values())
-    print(assemble(seqs))
+    print(assemble2(seqs))
     
 
 if __name__ == "__main__":
