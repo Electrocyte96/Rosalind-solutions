@@ -67,27 +67,17 @@ def assemble(seqs:list)->str:
     return seq
 
 def assemble2(seqs:list)->str:
-    print('inicio de la funcion seqs tiene', len(seqs), 'lementos')
-    seq = seqs.pop(0)
-    print('aqui todavia no entra el loop',seqs)
-    while seqs:
-        r = right_read(seq, seqs)
-        if not r:
-            break
-        seq_over, i, i_ovr = r
-        seq = seq + seq_over[i_ovr:]
-        seqs.pop(i)
-        print(seqs)
-    print('aqui ya busco en la derecha y ahora procede en la izquierda',seqs)
-    while seqs:
-        r  = left_read(seq, seqs)
-        if not r:
-            break
-        seq_over, i, i_ovr = r
-        seq = seq_over[:-i_ovr] + seq
-        seqs.pop(i)
-        print(seqs)
-    return seq
+    n = len(seqs)
+    ovr_best = 0
+    for i in range(n):
+        for j in range(n):
+            if seqs[i] != seqs[j]:
+                if overlap(seqs[i], seqs[j]) > ovr_best:
+                    ovr_best = overlap(seqs[i], seqs[j])
+                    f_seq, s_seq  = seqs[i], seqs[j]
+                    print(f_seq + s_seq[ovr_best:], ovr_best)
+        
+    
 
 def main():
     dna_seqs = '''
