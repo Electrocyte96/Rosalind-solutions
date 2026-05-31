@@ -24,7 +24,7 @@ def permutation(elements:list)->list:
     return result
 
 def main():
-    n = 3
+    n = 2
     n_list = [x for x in range(1,n+1)]
     perm_n = permutation(n_list)
     print(facts(n))
