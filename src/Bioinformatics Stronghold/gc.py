@@ -42,7 +42,7 @@ def gc_cont(s:str)->float:
             gc_count+=1
     return (gc_count/n)*100
 
-def max_gc(seq_dict)->float:
+def max_gc(seq_dict:dict)->float:
     gc_max = {key: gc_cont(value) for key, value in seq_dict.items()}
     max_entry = max(gc_max, key=gc_max.get)
     max_value = gc_max[max_entry]
