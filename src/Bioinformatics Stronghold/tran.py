@@ -61,8 +61,8 @@ GGTACGAGTGTTCCTTTGGGT
 '''.splitlines()
     dna_dict = fasta_to_dict(dna)
     seqs = list(dna_dict.values())
-    ratio = traversion_transition_ratio(seqs[0], seqs[1])
-    print(f'{ratio:.11f}')
+    #ratio = traversion_transition_ratio(seqs[0], seqs[1])
+    #print(f'{ratio:.11f}')
     ratio_2 = traversion_transition_ratio_2(seqs[0], seqs[1])
     print(f'{ratio_2:.11f}')
 
