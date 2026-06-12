@@ -6,6 +6,8 @@ same number of occurrences of 'C' as 'G'. The length of the string is at most 30
 Return: The total number of noncrossing perfect matchings of basepair edges in the 
 bonding graph of s, modulo 1,000,000.
 '''
+memo = {}
+
 def fasta_to_dict(dna_strings:str)->dict:
     seq_dict = {}
     seq=[]
@@ -26,6 +28,8 @@ def is_complement(base1: str, base2: str)->bool:
     return base1 + base2  in ("AU", "UA", "CG", "GC")
 
 def count_structures(rna:str)->int:
+    if rna in memo:
+        return memo[rna]
     if rna == '':
         return 1
     if len(rna) % 2 != 0:
@@ -39,6 +43,7 @@ def count_structures(rna:str)->int:
             inner, outer = rna[1:i], rna[i+1:]
             inner_seqs, outer_seqs = (count_structures(inner)), (count_structures(outer))
             total += inner_seqs * outer_seqs
+    memo[rna] = total
     return total
 
 def main():
@@ -46,10 +51,7 @@ def main():
 AUAU'''.splitlines()
     rna_dict = fasta_to_dict(rna_fas)
     rna = ''.join(rna_dict.values())
-    
     print(count_structures(rna)%1000000)
-    
-
 
 if __name__ == "__main__":
     main()
