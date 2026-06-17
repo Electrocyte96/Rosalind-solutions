@@ -2,7 +2,16 @@
 
 This problem just like any other problem with recursion took me some time but at the very end I was able to crack it. Also this problem strongly forces you to implement some sort of memoization. At first everything looks right when using Rosalind's sample dataset, but when it comes down to use the dataset to pass the problem in the platform, at least for me memoization is needed because finding the solution takes more (way more) than 5:00 minutes.
 
-Just to be clear the function `count_structures(rna:str)` recives a string and calls `is_complement(first_base, rna[i]` function that recives two strings, ideally characters i.e. `'A'` and `'U'`, and returns a boolean if the pairing is possible in a biological transcription context.  
+Just to be clear the function `count_structures(rna)` recives a string and calls `is_complement(first_base, rna[i]` function that recives two strings, ideally characters i.e. `'A'` and `'U'`, and returns a boolean if the pairing is possible in a biological transcription context.  
+
+The main idea of the `count_structures(rna)` function is to pair compatible nucleotides and if so, take those nucleotides and divide  rna secuence in two parts,  `inner =  rna[1:i]` and `outer = rna[i+1:]`. Let's say that we have the sequence `'AUAUAU'` and if we pair ``A[0]`` and ``U[3]`` then  ``inner = "UA"`` and ``outer = "AU"``. And then apply `count_structures(rna)` on both inner and outer and so on. The goal of `count_structures(rna)` is to get all inner structures * outer structures. 
+
+Now let's take a look on the base cases:  
+When the given string is empty
+```
+if rna == "":
+    return 1
+```
 
 ```
 def count_structures(rna:str)->int:
@@ -24,3 +33,4 @@ def count_structures(rna:str)->int:
     memo[rna] = total
     return totalx
 ```
+
