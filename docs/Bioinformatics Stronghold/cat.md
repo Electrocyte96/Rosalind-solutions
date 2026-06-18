@@ -44,7 +44,7 @@ if len(rna) % 2 != 0:
         return 0
 ```
 
-Following that idea we can note that for-loop starts at one and only iterates through odd numbers, because given a odd rna sequence then the inner sequence will be lenght even and therefore might be perfect.
+Following that idea we can note that the for-loop starts at one and only iterates through odd numbers, because given a odd rna sequence then the inner sequence will be lenght even and therefore might be perfect.
 
 ```
 for i in range(1, n, 2):
