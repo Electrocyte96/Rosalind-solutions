@@ -4,7 +4,7 @@ Each of the functions to solve this problem, `longest_increasing(perm, n)` and `
 
 Each of the functions recieve a list of elements and n,being the lenght of the list. Through this document I'm looking to document the iterations of all the loops and have a better understanding on how the functions are working.
 
-I will illustrate the function `longest_increasing(perm, n)` with `perm = [1,10,5,2,7,8]` and `n = 6`. Also the function creates `longs = [1] * n`, a list with ``n`` ones because 1 is the minimal lenght of a increasing or decreasing sequence
+I will illustrate the function `longest_increasing(perm, n)` with `perm = [1,10,5,2,7,8]` and `n = 6`. Also the function creates `longs = [1] * n`, a list with ``n`` ones because 1 is the minimal lenght of a increasing or decreasing sequence.
 
 <div align='center'>
     <h4>When i = 1, j ranges from 0 to 1 excluiding 1 </h4> 
