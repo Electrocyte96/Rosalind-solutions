@@ -16,7 +16,7 @@ I will illustrate the function `longest_increasing(perm, n)` with `perm = [1,10,
                 <th>if perm[j] < perm[i]: </th>
                 <th> if longs[j] + 1 > long[i]</th>
                 <th>longs[i] = longs[j]+1</th>
-                <th>longs<th>
+                <th>longs</th>
                 <th>padres[i] = j </th>
                 <th>padres</th>
             </tr>
@@ -26,14 +26,15 @@ I will illustrate the function `longest_increasing(perm, n)` with `perm = [1,10,
                 <td >i = 1</td>
                 <td>j = 0</td>
                 <td> 1 < 10</td>
-                <td> 1 + 1 > 1</td>
-                <td> longs[1] = 1 + 1 </td>
+                <td> 1+1 > 1</td>
+                <td> longs[1] = 1+1 </td>
                 <td>[1,2,1,1,1,1]</td>
                 <td>padres[1] = 0</td>
                 <td>[-1,0,-1,-1,-1,-1]</td>
             </tr>
         </tbody>
     </table>
+    <p>perm = [1,10,5,2,7,8] longs = [1,2,1,1,1,1] padres = [-1,0,-1,-1,-1,-1]</p>
 </div>
 
 <div align='center'>
@@ -44,17 +45,80 @@ I will illustrate the function `longest_increasing(perm, n)` with `perm = [1,10,
                 <th>i</th>
                 <th>j</th>
                 <th>if perm[j] < perm[i]: </th>
+                <th> if longs[j] + 1 > long[i]</th>
                 <th>longs[i] = longs[j]+1</th>
-                <th>longs<th>
+                <th>longs</th>
+                <th>padres[i] = j </th>
                 <th>padres</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td >i = 2</td>
+                <td rowspan="2">i = 2</td>
                 <td>j = 0</td>
                 <td> 1 < 5 </td>
+                <td>2 > 1</td>
+                <td>longs[2] = 1+1 </td>
+                <td>[1,2,2,1,1,1]</td>
+                <td>padres[2] = 0</td>
+                <td>[-1,0,0,-1,-1,-1]</td>
+            </tr>
+            <tr>
+                <td>j = 1</td>
+                <td>10 < 5 </td>
+                <td> - </td>
+                <td>- </td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>perm = [1,10,5,2,7,8] longs = [1,2,2,1,1,1] padres = [-1,0,0,-1,-1,-1]</p>
+</div>
+
+<div align='center'>
+    <h4>When i = 3, j ranges from 0 to 3 excluiding 3</h4> 
+    <table>
+        <thead>
+            <tr>
+                <th>i</th>
+                <th>j</th>
+                <th>if perm[j] < perm[i]: </th>
+                <th> if longs[j] + 1 > long[i]</th>
+                <th>longs[i] = longs[j]+1</th>
+                <th>longs</th>
+                <th>padres[i] = j </th>
+                <th>padres</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowspan="3">i = 3</td>
+                <td>j = 0</td>
+                <td> </td>
                 <td>  </td>
+                <td>longs[] = </td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>j = 1</td>
+                <td> </td>
+                <td>  </td>
+                <td>longs[] = </td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>j = 2</td>
+                <td> </td>
+                <td>  </td>
+                <td>longs[] = </td>
+                <td></td>
+                <td></td>
                 <td></td>
             </tr>
         </tbody>
@@ -69,8 +133,10 @@ I will illustrate the function `longest_increasing(perm, n)` with `perm = [1,10,
                 <th>i</th>
                 <th>j</th>
                 <th>if perm[j] < perm[i]: </th>
+                <th> if longs[j] + 1 > long[i]</th>
                 <th>longs[i] = longs[j]+1</th>
-                <th>longs<th>
+                <th>longs</th>
+                <th>padres[i] = j </th>
                 <th>padres</th>
             </tr>
         </thead>
@@ -80,6 +146,8 @@ I will illustrate the function `longest_increasing(perm, n)` with `perm = [1,10,
                 <td>j = </td>
                 <td> </td>
                 <td>  </td>
+                <td>longs[] = </td>
+                <td></td>
                 <td></td>
                 <td></td>
             </tr>
