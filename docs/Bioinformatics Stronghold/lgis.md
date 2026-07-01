@@ -258,25 +258,55 @@ I think here is worth mentioning the why on the second conditional `if longs[j] 
     <hr></hr>
 </div>
 
-Now I'll explain the other part of the algorithm, 
+Now I'll explain the other tricky part of the algorithm. The idea here is to use `padres` as a map for the values of interest in `perm`. First, we start by finding the index of the greatest value in `longs` with `idx = longs.index(max(longs))`. In this case, the maximum length is 4, which is located at index 5, so `idx = 5`. This is the starting point for the backtracking.
 
+- So we begin with ``idx = 5``, search it in `perm` so ``perm[idx] -> perm[5] = 8`` and append it to `lis` then `idx = padres[idx] -> padres[5] = 4`, this last value is passed to the next iteration
+
+- We continue with `idx = 4`, search it in `perm` so `perm[idx] -> perm[4] = 7` and append it to ``lis`` then `idx = padres[idx] -> padres[4] = 2`, this last value is passed to the next iteration  
+
+- We continue with `idx = 2`, search it in `perm` so `perm[idx] -> perm[2] = 5` and append it to ``lis`` then `idx = padres[idx] -> padres[2] = 0`, this last value is passed to the next iteration
+
+- We continue with `idx = 0`, search it in `perm` so `perm[idx] -> perm[0] = 1` and append it to ``lis`` then `idx = padres[idx] -> padres[0] = -1`, this last value breaks the while loop.
 
 <div align='center'>
     <table>
+    <p>perm = [1,10,5,2,7,8] padres = [-1,0,0,0,2,4]</p>
         <thead>
             <tr>
                 <th>idx</th>
-                <th>perm</th>
+                <th>perm[idx]</th>
                 <th>lis</th>
-                <th></th>
+                <th>padres[idx]</th>
             </tr>
         </thead>
         <tbody>
         <tr>
-            <td></td>
+            <td>5</td>
+            <td>8</td>
+            <td>[8]</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>7</td>
+            <td>[8, 7]</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>5</td>
+            <td>[8, 7, 5]</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>1</td>
+            <td>[8, 7, 5, 1]</td>
+            <td>-1</td>
         </tr>
         </tbody>
     </table>
+    <p>Finally you return reversed elements of the list and that's it</p>
 </div>
 
 
