@@ -258,3 +258,26 @@ I think here is worth mentioning the why on the second conditional `if longs[j] 
     <hr></hr>
 </div>
 
+Now I'll explain the other part of the algorithm, 
+
+
+<div align='center'>
+    <table>
+        <thead>
+            <tr>
+                <th>idx</th>
+                <th>perm</th>
+                <th>lis</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
