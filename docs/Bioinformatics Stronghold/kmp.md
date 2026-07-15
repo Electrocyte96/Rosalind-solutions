@@ -2,10 +2,53 @@
 
 This problem introduced me to another way of finding motifs in a sequence, until now I was pretty familiar with the idea of a "sliding-window" algorithm, but never crossed my mind that this classic solution finds motifs in a $\textit{O(n*m)}$ complexity and that is easily improved with the Knuth-Morris-Pratt algorithm or KMP, this other algorithm solves the problem in $\textit{O(n+m)}$ time complexity. 
 
-The algoritm is pretty straightforward until the functioning of the `ls_prefix` list and `j = ls_prefix[j-1]` part. The first one tells exactly you how many nucleotides at the end of `s` are a identical copy of the nucleotides from the begining of `s` 
+The algoritm is pretty straightforward until the behavior of the `ls_prefix` list and `j = ls_prefix[j-1]` part.
+
+First I will explain the `ls_prefix` structure, the idea of this list is to save the lenght of the best matching subchain from `s` at any given `i`. For example:
+
+<div align='center'>
+    <table>
+        <tbody>
+            <tr>
+                <td><small>index </small></td>
+                <td><small>0</small></td>
+                <td><small>1 </small></td>
+                <td><small> 2</small></td>
+                <td><small>3 </small></td>
+                <td><small>4</small></td>
+                <td><small>5 </small></td>
+                <td><small>6 </small></td>
+                <td><small>7 </small></td>
+                <td><small>8 </small></td>
+            </tr>
+            <tr>
+                <td>s</td>
+                <td>A</td>
+                <td>A</td>
+                <td>G</td>
+                <td>A</td>
+                <td>A</td>
+                <td>T</td>
+                <td>G</td>
+                <td>A</td>
+                <td>A</td>
+            </tr>
+            <tr>
+                <td>ls_prefix</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+As I described before, each character (nucleotides) of `s` corresponds a element of `ls_prefix` that tells you how many concatenaded nucleotides match with the `s` prefix. Let's say we take `i = 4` we take `s_sub = s[:i+1] -> [A A G A A]` and we look at `ls_prefix[i] = 2 `. 
 
 
-cuántos nucleótidos al final de tu subcadena actual (s[:i+1]) son una copia idéntica de los nucleótidos al principio de toda tu secuencia s.
-
-C A G C A T G G T A T C A C A G C A G A G  
-0 0 0 1 2 0 0 0 0 0 0 1 2 1 2 3 4 5 3 0 0
