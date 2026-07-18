@@ -49,9 +49,9 @@ First I will explain the `ls_prefix` structure, the idea of this list is to save
     </table>
 </div>
 
-As I described before, each character (nucleotide) of `s` corresponds a element of `ls_prefix` that tells you how many concatenaded nucleotides match with the `s` prefix. Let's say we take `i = 4` we take `s_sub = s[:i+1] -> [A A G A A]` and we look at `ls_prefix[i] = 2 ` this means that there are two nucleotides that match with the prefix of `s`. This idea repeats for each elemens of `ls_prefix`.  
+As I described before, each character (nucleotide) of `s` corresponds a element of `ls_prefix` that tells you how many concatenaded nucleotides match with the `s` prefix. Let's say we take `i = 4` we take `s_sub = s[:i+1] -> [A A G A A]` and we look at `ls_prefix[i] = 2 ` this means that there are two nucleotides that match with the prefix of `s`. This idea repeats for each element of `ls_prefix`.  
 
-Now I'll cover all iterations of the code using `s = 'ABACABAB'` and `ls_prefix = [0,0,0,0,0,0,0,0]` and ``n = len(s) = 8``
+Now I'll cover all iterations of the code using `s = 'ABACABAB'`, `ls_prefix = [0,0,0,0,0,0,0,0]` and ``n = len(s) = 8``
 <div align='center'>
     <table>
         <thead>
@@ -176,7 +176,7 @@ Now I'll cover all iterations of the code using `s = 'ABACABAB'` and `ls_prefix 
                 <td>[0,0,1,0,1,2,3,2]</td>
             </tr>
             <tr>
-                <td colspan='11', align='center'> i < n => 8 < 8. False so loop breaks</td>
+                <td colspan='11', align='center'> i < n => 8 < 8. False, so loop breaks</td>
             </tr>
         </tbody>
     </table>
