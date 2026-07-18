@@ -51,7 +51,7 @@ First I will explain the `ls_prefix` structure, the idea of this list is to save
 
 As I described before, each character (nucleotide) of `s` corresponds a element of `ls_prefix` that tells you how many concatenaded nucleotides match with the `s` prefix. Let's say we take `i = 4` we take `s_sub = s[:i+1] -> [A A G A A]` and we look at `ls_prefix[i] = 2 ` this means that there are two nucleotides that match with the prefix of `s`. This idea repeats for each elemens of `ls_prefix`.  
 
-Now I'll cover all iterations of the code using `s = 'ABACABAB'` and `ls_prefix = [0,0,0,0,0,0,0,0]`
+Now I'll cover all iterations of the code using `s = 'ABACABAB'` and `ls_prefix = [0,0,0,0,0,0,0,0]` and ``n = len(s) = 8``
 <div align='center'>
     <table>
         <thead>
@@ -122,11 +122,61 @@ Now I'll cover all iterations of the code using `s = 'ABACABAB'` and `ls_prefix 
                 <td>A == A</td>
                 <td>1</td>
                 <td>ls_prefix[4] = 1</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>5</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>[0,0,1,0,1,0,0,0]</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>1</td>
+                <td>B == B</td>
+                <td>2</td>
+                <td>ls_prefix[5] = 2</td>
+                <td>6</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>[0,0,1,0,1,2,0,0]</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>2</td>
+                <td>A == A</td>
+                <td>3</td>
+                <td>ls_prefix[5] = 3</td>
+                <td>7</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>[0,0,1,0,1,2,3,0]</td>
+            </tr>
+            <tr>
+                <td rowspan='2'>7</td>
+                <td>3</td>
+                <td>B == C</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>1 = ls_prefix[3-1]</td>
+                <td>[0,0,1,0,1,2,3,0]</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>B == B</td>
+                <td>2</td>
+                <td>ls_prefix[7] = 2</td>
+                <td>8</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>[0,0,1,0,1,2,3,2]</td>
+            </tr>
+            <tr>
+                <td colspan='11', align='center'> i < n => 8 < 8. False so loop breaks</td>
             </tr>
         </tbody>
     </table>
