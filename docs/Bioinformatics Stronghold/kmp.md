@@ -49,8 +49,87 @@ First I will explain the `ls_prefix` structure, the idea of this list is to save
     </table>
 </div>
 
-As I described before, each character (nucleotide) of `s` corresponds a element of `ls_prefix` that tells you how many concatenaded nucleotides match with the `s` prefix. Let's say we take `i = 4` we take `s_sub = s[:i+1] -> [A A G A A]` and we look at `ls_prefix[i] = 2 ` this means that there are two nucleotides that match with the prefix of `s`.
+As I described before, each character (nucleotide) of `s` corresponds a element of `ls_prefix` that tells you how many concatenaded nucleotides match with the `s` prefix. Let's say we take `i = 4` we take `s_sub = s[:i+1] -> [A A G A A]` and we look at `ls_prefix[i] = 2 ` this means that there are two nucleotides that match with the prefix of `s`. This idea repeats for each elemens of `ls_prefix`.  
 
-
+Now I'll cover all iterations of the code using `s = 'ABACABAB'` and `ls_prefix = [0,0,0,0,0,0,0,0]`
+<div align='center'>
+    <table>
+        <thead>
+            <tr>
+                <th>i</th>
+                <th>j</th>
+                <th>if s[i] == s[j]</th>
+                <th>j+=1</th>
+                <th>ls_prefix[i] = j</th>
+                <th>i+=1 </th>
+                <th>if j==0</th>
+                <th>i+=1 </th>
+                <th>j = ls_prefix[j-1]</th>
+                <th>ls_prefix</th>                
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>B == A</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>True</td>
+                <td>2</td>
+                <td>-</td>
+                <td>[0,0,0,0,0,0,0,0]</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>0</td>
+                <td>A == A</td>
+                <td>1</td>
+                <td>ls_prefix[2] = 1</td>
+                <td>3</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>[0,0,1,0,0,0,0,0]</td>
+            </tr>
+            <tr>
+                <td rowspan='2'>3</td>
+                <td>1</td>
+                <td>C == B</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>0 = ls_prefix[1-1]</td>
+                <td>[0,0,1,0,0,0,0,0]</td>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td>C == A</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>True</td>
+                <td>4</td>
+                <td>-</td>
+                <td>[0,0,1,0,0,0,0,0]</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>0</td>
+                <td>A == A</td>
+                <td>1</td>
+                <td>ls_prefix[4] = 1</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
 
