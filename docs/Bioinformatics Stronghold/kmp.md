@@ -49,7 +49,7 @@ First I will explain the `ls_prefix` structure, the idea of this list is to save
     </table>
 </div>
 
-As I described before, each character (nucleotide) of `s` corresponds a element of `ls_prefix` that tells you how many concatenaded nucleotides match with the `s` prefix. Let's say we take `i = 4` we take `s_sub = s[:i+1] -> [A A G A A]` and we look at `ls_prefix[i] = 2 ` this means that there are two nucleotides that match with the prefix of `s` and also is worth noting that this two in this nucleotides are at the end of the subchain. This idea repeats for each element of `ls_prefix`, then intrinsically this algorithm searches coincidences in prefixes and suffixes.
+As I described before, each character (nucleotide) of `s` corresponds to an element of `ls_prefix` that tells you how many concatenaded nucleotides match with the `s` prefix. Let's say we take `i = 4` we take `s_sub = s[:i+1] -> [A A G A A]` and we look at `ls_prefix[i] = 2 ` this means that there are two nucleotides that match with the prefix of `s` and also is worth noting that these two nucleotides are at the end of the subchain. This idea repeats for each element of `ls_prefix`, then intrinsically this algorithm searches coincidences in prefixes and suffixes.
 
 Now I'll cover all iterations of the code using `s = 'ABACABAB'`, `ls_prefix = [0,0,0,0,0,0,0,0]` and ``n = len(s) = 8``
 <div align='center'>
@@ -182,7 +182,7 @@ Now I'll cover all iterations of the code using `s = 'ABACABAB'`, `ls_prefix = [
     </table>
 </div>
 
-As showed before, when two nucleotides are equal `s[i] == s[j]` then `j` increases one to compare the element next after the iteration, (note that this has to be before than) and you save the value of  `ls_prefix[i] = j` and finally `i` increases one to compare the element next. But if `s[i] != s[j]` then first you check if `j == 0`, if is then `i+=1` you move to the next element. but if `j != 0` then you assign the previous value of ``j`` in `ls_prefix` to `j`. This line is confusing and at the same time is brilliant because of a simple fact, and is this is: "The end of one streak can be the beginning of a new one". Lets try to see it more clearly with the next example
+As shown before, when two nucleotides are equal `s[i] == s[j]` then `j` increases one to compare the element next after the iteration and you save the value of  `ls_prefix[i] = j` and finally `i` increases one to compare the element next. But if `s[i] != s[j]` then first you check if `j == 0`, if it is, then `i+=1` you move to the next element. but if `j != 0` then you assign the previous value of ``j`` in `ls_prefix` to `j`. This line is confusing and at the same time is brilliant because of a simple fact, and is this is: "The end of one streak can be the beginning of a new one". Lets try to see it more clearly with the next example
 
 <div align='center'>
     <table>
@@ -295,7 +295,7 @@ Lets take a look of what is happening in each iteration when comparing indexes `
 
 As we can see when `i = 3` and `j = 0` we start a streak first with: $$A_3 == A_0✓$$  
 then `i = 4` and `j = 1` $$A_4 == A_1 ✓ $$
-but when `i = 5` and `j = 2` $$A_5 == G_2✗$$ we encounter a problem with becuse both nucleotides are different and since `j != 0` we enter to the `j = ls_prefix[j-1]` line. Is here when the sentence: "The end of one streak can be the beginning of a new one" makes sense. And this is when doing `j = ls_prefix[j-1]` we are checking in the next iteration if the previous value `s[j-1]` matches `s[i]` creating some sort of "mirror". And actually in the given `s` there is one. Also if there is no previous value of `s[j]` that matches `s[i]`, then ``j`` can go to 0 and after that, well you know...  
+but when `i = 5` and `j = 2` $$A_5 == G_2✗$$ we encounter a problem with because both nucleotides are different and since `j != 0` we enter to the `j = ls_prefix[j-1]` line. Is here when the sentence: "The end of one streak can be the beginning of a new one" makes sense. And this is when doing ``j = ls_prefix[j-1]`` we are updating ``j`` to the length of the next valid prefix, checking in the next iteration if this new ``s[j]`` matches ``s[i]``, creating some sort of mirror. And actually in the given `s` there is one. Also if there is no previous value of `s[j]` that matches `s[i]`, then ``j`` can go to 0 and after that, well you know...  
 
 We continue with `i = 5` and `j = 1` $$A_5 == A_1 ✓$$
 After this point we continue normally until `i<n == False`. 
