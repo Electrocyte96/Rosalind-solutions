@@ -182,7 +182,7 @@ Now I'll cover all iterations of the code using `s = 'ABACABAB'`, `ls_prefix = [
     </table>
 </div>
 
-As showed before, when two nucleotides are equal `s[i] == s[j]` then `j` increases one to compare the element next after the iteration, (note that this has to be before than) and you save the value of  `ls_prefix[i] = j` and finally `i` increases one to compare the element next. But if `s[i] != s[j]` then first you check if `j == 0`, if is then `i+=1` you move to the next element. but if `j != 0` then you assign the previous value of ``j`` in `ls_prefix` to `j`. This line is confusing and at the same time is brilliant because of a simple fact, and is this is: "The end of one streak can be the beginning of a new one". Lets try to see it more clearly with the example
+As showed before, when two nucleotides are equal `s[i] == s[j]` then `j` increases one to compare the element next after the iteration, (note that this has to be before than) and you save the value of  `ls_prefix[i] = j` and finally `i` increases one to compare the element next. But if `s[i] != s[j]` then first you check if `j == 0`, if is then `i+=1` you move to the next element. but if `j != 0` then you assign the previous value of ``j`` in `ls_prefix` to `j`. This line is confusing and at the same time is brilliant because of a simple fact, and is this is: "The end of one streak can be the beginning of a new one". Lets try to see it more clearly with the next example
 
 <div align='center'>
     <table>
@@ -226,3 +226,76 @@ As showed before, when two nucleotides are equal `s[i] == s[j]` then `j` increas
         </tbody>
     </table>
 </div>
+
+Lets take a look of what is happening in each iteration when comparing indexes `i` and `j` in the `s` above.
+
+<div align='center'>
+    <table>
+        <thead>
+            <tr>
+                <th>i</th>
+                <th>j</th>
+                <th>match(?)</th>
+            <tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td align='center'>✓</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>1</td>
+                <td align='center'>✗</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>0</td>
+                <td align='center'>✗</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>0</td>
+                <td align='center'>✓</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>1</td>
+                <td align='center'>✓</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>2</td>
+                <td align='center'>✗</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>1</td>
+                <td align='center'>✓</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>2</td>
+                <td align='center'>✓</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>3</td>
+                <td align='center'>✓</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>4</td>
+                <td align='center'>✓</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+As we can see when `i = 3` and `j = 0` we start a streak first with: $$A_3 == A_0✓$$  
+then `i = 4` and `j = 1` $$A_4 == A_1 ✓ $$
+but when `i = 5` and `j = 2` $$A_5 == G_2✗$$ we encounter a problem with becuse both nucleotides are different and since `j != 0` we enter to the `j = ls_prefix[j-1]` line. Is here when the sentence: "The end of one streak can be the beginning of a new one" makes sense. And this is when doing `j = ls_prefix[j-1]` we are checking in the next iteration if the previous value `s[j-1]` matches `s[i]` creating some sort of "mirror". And actually in the given `s` there is one. Also if there is no previous value of `s[j]` that matches `s[i]`, then ``j`` can go to 0 and after that, well you know...  
+
+We continue with `i = 5` and `j = 1` $$A_5 == A_1 ✓$$
+After this point we continue normally until `i<n == False`. 
