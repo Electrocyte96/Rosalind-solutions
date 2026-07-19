@@ -182,4 +182,47 @@ Now I'll cover all iterations of the code using `s = 'ABACABAB'`, `ls_prefix = [
     </table>
 </div>
 
-As showed before, when two nucleotides are equal `s[i] == s[j]` then `j` increases one, note that this has to be before than `ls_prefix[i] = j` and finally `i` increases one. 
+As showed before, when two nucleotides are equal `s[i] == s[j]` then `j` increases one to compare the element next after the iteration, (note that this has to be before than) and you save the value of  `ls_prefix[i] = j` and finally `i` increases one to compare the element next. But if `s[i] != s[j]` then first you check if `j == 0`, if is then `i+=1` you move to the next element. but if `j != 0` then you assign the previous value of ``j`` in `ls_prefix` to `j`. This line is confusing and at the same time is brilliant because of a simple fact, and is this is: "The end of one streak can be the beginning of a new one". Lets try to see it more clearly with the example
+
+<div align='center'>
+    <table>
+        <tbody>
+            <tr>
+                <td><small>index </small></td>
+                <td><small>0</small></td>
+                <td><small>1</small></td>
+                <td><small>2</small></td>
+                <td><small>3</small></td>
+                <td><small>4</small></td>
+                <td><small>5</small></td>
+                <td><small>6</small></td>
+                <td><small>7</small></td>
+                <td><small>8</small></td>
+            </tr>
+            <tr>
+                <td>s</td>
+                <td>A</td>
+                <td>A</td>
+                <td>G</td>
+                <td>A</td>
+                <td>A</td>
+                <td>A</td>
+                <td>G</td>
+                <td>A</td>
+                <td>A</td>
+            </tr>
+            <tr>
+                <td>ls_prefix</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
