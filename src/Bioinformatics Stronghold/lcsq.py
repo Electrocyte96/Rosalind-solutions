@@ -21,14 +21,7 @@ def fasta_to_dict(dna_strings:str)->dict:
         seq_dict[header] = ''.join(seq)
     return seq_dict
 
-def main():
-    seqs = """>Rosalind_23
-AACCTTGG
->Rosalind_64
-ACACTGTGA""".splitlines()
-    seqs_dict=fasta_to_dict(seqs)
-    a, b = seqs_dict.values()
-
+def alignment_matrix(a:str, b:str)->list:
     a_len, b_len = len(a)+1 , len(b)+1 #rows AACCTTGG, #cols ACACTGTGA
     
     M = [[0] * b_len  for i in range(a_len)]
@@ -43,9 +36,39 @@ ACACTGTGA""".splitlines()
                 M[i][j] = max(up, left, diagonal+1)
             else:
                 M[i][j] = max(up, left, diagonal)
-    
-    for i in M:
-        print(i)
+    return M
+
+def main():
+    seqs = """>Rosalind_23
+AACCTTGG
+>Rosalind_64
+ACACTGTGA""".splitlines()
+    seqs_dict=fasta_to_dict(seqs)
+    a, b = seqs_dict.values()
+
+    mat = alignment_matrix(a, b)
+    i,j = len(a), len(b) #i is vertical, j is horizontal 
+
+    sequence = []
+    while i != 0 and j != 0:
+        if mat[i][j] == mat[i][j-1]:
+            j-=1
+        elif mat[i][j] == mat[i-1][j]:
+            i-=1
+        else:
+            if a[i-1] == b[j-1]:
+                sequence.append(a[i-1])
+            i-=1
+            j-=1
+
+    print("".join(sequence), a, b)
+
+
+
+
+
+
+
 
 
 
