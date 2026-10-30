@@ -38,17 +38,8 @@ def alignment_matrix(a:str, b:str)->list:
                 M[i][j] = max(up, left, diagonal)
     return M
 
-def main():
-    seqs = """>Rosalind_23
-AACCTTGG
->Rosalind_64
-ACACTGTGA""".splitlines()
-    seqs_dict=fasta_to_dict(seqs)
-    a, b = seqs_dict.values()
-
-    mat = alignment_matrix(a, b)
+def shared_motif(a:str,b:str, mat:list)->str:
     i,j = len(a), len(b) #i is vertical, j is horizontal 
-
     sequence = []
     while i != 0 and j != 0:
         if mat[i][j] == mat[i][j-1]:
@@ -60,8 +51,22 @@ ACACTGTGA""".splitlines()
                 sequence.append(a[i-1])
             i-=1
             j-=1
+    
+    sequence.reverse()
+    return "".join(sequence)
 
-    print("".join(sequence), a, b)
+def main():
+    seqs = """>Rosalind_23
+AACCTTGG
+>Rosalind_64
+ACACTGTGA
+""".splitlines()
+    seqs_dict=fasta_to_dict(seqs)
+    a, b = seqs_dict.values()
+
+    mat = alignment_matrix(a, b)
+    
+    print(shared_motif(a,b,mat))
 
 
 
